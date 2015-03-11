@@ -172,7 +172,7 @@ joint.dia.ElementView = joint.dia.CellView.extend({
 
         var allAttrs = this.model.get('attrs');
 
-        var rotatable = V(this.$('.rotatable')[0]);
+        var rotatable = V(this.el).findOne('.rotatable');
         if (rotatable) {
 
             var rotation = rotatable.attr('transform');
@@ -271,7 +271,7 @@ joint.dia.ElementView = joint.dia.CellView.extend({
                    _.each($selected, function(el, index, list) {
                        var $el = $(el);
                        // copy original list selector to the element
-                       $el.selector = list.selector;
+                       $el.selector = selector;
                        relativelyPositioned.push($el);
                    });
             }
@@ -385,7 +385,7 @@ joint.dia.ElementView = joint.dia.CellView.extend({
             if (isScalable) {
 
                 // Compensate for the scale grid in case the elemnt is in the scalable group.
-                var scale = V(this.$('.scalable')[0]).scale();
+                var scale = V(this.el).findOne('.scalable').scale();
                 tx = bbox.x + bbox.width + refDx / scale.sx;
                 
             } else {
@@ -398,7 +398,7 @@ joint.dia.ElementView = joint.dia.CellView.extend({
             if (isScalable) {
                 
                 // Compensate for the scale grid in case the elemnt is in the scalable group.
-                var scale = V(this.$('.scalable')[0]).scale();
+                var scale = V(this.el).findOne('.scalable').scale();
                 ty = bbox.y + bbox.height + refDy / scale.sy;
             } else {
                 
@@ -419,7 +419,7 @@ joint.dia.ElementView = joint.dia.CellView.extend({
             } else if (isScalable) {
 
                 // Compensate for the scale grid in case the elemnt is in the scalable group.
-                var scale = V(this.$('.scalable')[0]).scale();
+                var scale = V(this.el).findOne('.scalable').scale();
                 tx = bbox.x + refX / scale.sx;
                 
             } else {
@@ -436,7 +436,7 @@ joint.dia.ElementView = joint.dia.CellView.extend({
             } else if (isScalable) {
 
                 // Compensate for the scale grid in case the elemnt is in the scalable group.
-                var scale = V(this.$('.scalable')[0]).scale();
+                var scale = V(this.el).findOne('.scalable').scale();
                 ty = bbox.y + refY / scale.sy;
                 
             } else {
@@ -518,7 +518,7 @@ joint.dia.ElementView = joint.dia.CellView.extend({
         var size = this.model.get('size') || { width: 1, height: 1 };
         var angle = this.model.get('angle') || 0;
         
-        var scalable = V(this.$('.scalable')[0]);
+        var scalable = V(this.el).findOne('.scalable');
         if (!scalable) {
             // If there is no scalable elements, than there is nothing to resize.
             return;
@@ -537,7 +537,7 @@ joint.dia.ElementView = joint.dia.CellView.extend({
         // and getting the top-left corner of the resulting object. Then we clean up the rotation back to what it originally was.
         
         // Cancel the rotation but now around a different origin, which is the center of the scaled object.
-        var rotatable = V(this.$('.rotatable')[0]);
+        var rotatable = V(this.el).findOne('.rotatable');
         var rotation = rotatable && rotatable.attr('transform');
         if (rotation && rotation !== 'null') {
 
@@ -563,7 +563,7 @@ joint.dia.ElementView = joint.dia.CellView.extend({
 
     rotate: function() {
 
-        var rotatable = V(this.$('.rotatable')[0]);
+        var rotatable = V(this.el).findOne('.rotatable');
         if (!rotatable) {
             // If there is no rotatable elements, then there is nothing to rotate.
             return;

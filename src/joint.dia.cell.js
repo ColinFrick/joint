@@ -701,8 +701,9 @@ joint.dia.CellView = Backbone.View.extend({
 
         // These are either descendants of `this.$el` of `this.$el` itself. 
        // `.` is a special selector used to select the wrapping `<g>` element.
-        var $selected = selector === '.' ? this.$el : this.$el.find(selector);
-        return $selected;
+        return selector === '.' ? this.$el : $(_.map(V(this.el).find(selector), function (el) {
+            return el.node ? el.node : el;
+        }));
     },
 
     notify: function(evt) {

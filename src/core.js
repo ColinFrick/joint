@@ -369,16 +369,16 @@ var joint = {
                 // or the first child of the rotatable group if not.
                 // This makese sense because usually the wrapping element
                 // is below any other sub element in the shapes.
-                var scalable = view.$('.scalable')[0];
-                var rotatable = view.$('.rotatable')[0];
+                var scalable = V(view.el).findOne('.scalable');
+                var rotatable = V(view.el).findOne('.rotatable');
 
-                if (scalable && scalable.firstChild) {
+                if (scalable && scalable.node && scalable.node.firstChild) {
 
-                    magnet = scalable.firstChild;
+                    magnet = scalable.node.firstChild;
 
-                } else if (rotatable && rotatable.firstChild) {
+                } else if (rotatable && rotatable.node && rotatable.node.firstChild) {
 
-                    magnet = rotatable.firstChild;
+                    magnet = rotatable.node.firstChild;
                 }
             }
 
